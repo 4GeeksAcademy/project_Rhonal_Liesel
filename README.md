@@ -1,25 +1,23 @@
-# Jupyter Notebook Template
+<!-- hide -->
 
-Use this template for creating Jupyter notebooks compatible with Gitpod and local environments.
+# Descriptive Statistics Exercises
 
-Once the Gitpod workspace has successfully loaded, it will install the most common dependencies used in a typical notebook.
+<!-- endhide -->
 
-## How to use
+Inside this repository, you will find a file called `./notebook/problems.ipynb` with the exercises you need to finish to complete it.
 
-- Add your notebooks in the `./notebbook` folder.
-- Open the notebooks and run the python code.
+## 🌱 How to start this project
 
-## Default dependencies
+The easiest way to start working on this project is by using Gitpod:
 
-```
-# Base ----------------------------------------
-pandas>=1.1.4
-numpy>=1.18.5
-opencv-python>=4.1.2
-matplotlib>=3.2.2
-ipyleaflet>=0.14.0
-sympy>=1.10.1
+1. Make a fork of [this repository](https://github.com/4GeeksAcademy/descriptive-statistics-exercises-project) into your github account.
+2. Open the recently created fork on Gitpod by using the [Gitpod button extension](https://www.gitpod.io/docs/browser-extension/).
+3. Once Gitpod VSCode has finished opening you can go ahead and open the `problems.ipynb` file and start solving each exercise inside the notebook.
 
-# Machine learning ----------------------------
-sklearn
-```
+## 🚛 How to deliver this project
+
+Once you are finished solving the exercises make sure to commit your changes, push to your repository fork and go to 4Geeks.com to upload the repository link.
+
+# Solutions
+
+We also incorporated a `solutions.ipynb` file that we strongly suggest you only use if you are stuck for more than 30min or if you have already finished and want to compare it with your approach.
