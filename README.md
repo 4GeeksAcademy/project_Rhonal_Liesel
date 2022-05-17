@@ -1,6 +1,6 @@
 <!-- hide -->
 
-# Descriptive Statistics Exercises
+# Probability Distribution Exercises
 
 <!-- endhide -->
 
