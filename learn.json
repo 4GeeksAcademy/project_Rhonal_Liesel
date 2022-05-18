@@ -1,8 +1,8 @@
 {
 	"title" : "Probability Distributions Exercises Project in Python",
-	"slug" : "probability-distributions-exercises-project-in-python",
-	"preview": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project/blob/main/preview.jpeg?raw=true",
-	"solution": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project/blob/main/notebook/solutions.ipynb",
+	"slug" : "probability-distributions-exercises-project-with-python",
+	"preview": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/preview.jpeg?raw=true",
+	"solution": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/notebook/solutions.ipynb",
 	"status": "published",
 	"translations": ["us"],
 	"technologies": ["matplotlib", "numpy", "pandas"],
