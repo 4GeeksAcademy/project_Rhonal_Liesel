@@ -9,5 +9,6 @@
 	"difficulty": "beginner",
 	"syntax": "python",
 	"duration" : 2,
+    "projectType": "project",
 	"description" : "Use your numpy, pandas and matplotib skills to practice a little about probability distributions"
 }
