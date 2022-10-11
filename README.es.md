@@ -1,6 +1,6 @@
 <!-- hide -->
 
-# Probability Distribution Exercises with Python
+# Ejercicios de Distribución de Probabilidad con Python
 
 <!-- endhide -->
 
