@@ -1,7 +1,5 @@
 <!-- hide -->
-
 # Ejercicios de Distribución de Probabilidad con Python
-
 <!-- endhide -->
 
 Dentro de este repositorio, encontrarás un archivo llamado `./notebook/problems.ipynb` con los ejercicios que necesitas terminar para completarlo.
@@ -18,6 +16,6 @@ La forma más fácil de comenzar a trabajar en este proyecto es usando Gitpod:
 
 Una vez que hayas terminado de resolver los ejercicios, asegúrate de confirmar tus cambios, hazle "push" a el fork de tu repositorio y ve a 4Geeks.com para subir el enlace del repositorio.
 
-# Soluciones
+## Soluciones
 
 También incorporamos un archivo `solutions.ipynb` que te sugerimos honestamente que solo uses si estás atascado durante más de 30 minutos o si ya has terminado y deseas compararlo con tu enfoque.
