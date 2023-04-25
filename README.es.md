@@ -6,11 +6,11 @@ Dentro de este repositorio, encontrarás un archivo llamado `./notebook/problems
 
 ## 🌱  Cómo iniciar este proyecto
 
-La forma más fácil de comenzar a trabajar en este proyecto es usando Gitpod:
+Este proyecto viene con los archivos necesarios para comenzar a trabajar de inmediato.
 
-1. Haz un fork de [este repositorio](https://github.com/breatheco-de/calculus-and-algebra-problems-with-python) en tu cuenta de github.
-2. Abre el fork creado recientemente en Gitpod usando la [extensión del botón Gitpod](https://www.gitpod.io/docs/browser-extension/).
-3. Una vez que Gitpod VSCode haya terminado de abrirse, puedes continuar y abrir el archivo `problems.ipynb` para comenzar a resolver cada ejercicio dentro de Notebook.
+1. Haz un fork de [este repositorio](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python) en tu cuenta de github.
+2. Abre el fork creado recientemente usando una herramienta de aprovisionamiento como [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recomendado) o [Gitpod](https://4geeks.com/es/lesson/como-utilizar-gitpod). Alternativamente, puedes clonarlo en tu computadora local usando el comando `git clone`.
+3. Una vez que haya terminado de abrirse, puedes continuar y abrir el archivo `problems.ipynb` para comenzar a resolver cada ejercicio dentro de Notebook.
 
 ## 🚛 Cómo entregar este proyecto
 
