@@ -13,4 +13,4 @@ ipyleaflet>=0.14.0
 sympy>=1.10.1
 
 # Machine learning ----------------------------
-sklearn
+scikit-learn
