@@ -1,21 +1,23 @@
-<!-- hide -->
-# Probability Distribution Exercises with Python
-<!-- endhide -->
+<!--hide-->
+# Probability distribution in Python - Step by step guide
+<!--endhide-->
 
-Inside this repository, you will find a file called `./notebook/problems.ipynb` with the exercises you need to finish to complete it.
+- Complete the problems using Python.
 
-## 🌱 How to start this project
+## 🌱  How to start this project.
 
-This project and its repository comes with the necessary files to start working.
+Follow the instructions below:
 
-1. Make a fork of [this repository](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python) into your github account.
-2. Open the recently created fork repository using a provisioning tool like [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or [Gitpod](https://4geeks.com/lesson/how-to-use-gitpod). Alternatively, you can clone it on your local computer using the `git clone` command.
-3. Once it has finished opening you can go ahead and open the `problems.ipynb` file and start solving each exercise inside the notebook.
+1. Create a new repository by forking the [Git project](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python) or [by clicking here](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/fork).
+2. Open the newly created repository in Codespace using the [Codespace button extension](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository).
+3. Once the Codespace VSCode has finished opening, start your project by following the instructions below.
 
 ## 🚛 How to deliver this project
 
-Once you are finished solving the exercises make sure to commit your changes, push to your repository fork and go to 4Geeks.com to upload the repository link.
+Once you have finished solving the exercises, be sure to commit your changes, push to your repository and go to 4Geeks.com to upload the repository link.
 
-## Solutions
+## 📝 Instructions
 
-We also incorporated a `./notebook/solutions.ipynb` file that we strongly suggest you only use if you are stuck for more than 30min or if you have already finished and want to compare it with your approach.
+Once you start working on the project, you will see a `./notebook/problems.ipynb` file containing a list of exercises. Complete each of them, one by one.
+
+> NOTA: Solution: https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/notebook/solutions.ipynb
