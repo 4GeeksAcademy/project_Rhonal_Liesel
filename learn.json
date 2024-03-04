@@ -10,5 +10,5 @@
 	"syntax": "python",
 	"duration" : 2,
     "projectType": "project",
-	"description" : "Use your numpy, pandas and matplotib skills to practice a little about probability distributions"
+	"description" : "Use your NumPy, Pandas and Matplotlib skills to practice a little about probability distributions"
 }
