@@ -4,7 +4,7 @@
 
 - Resolver los problemas utilizando Python.
 
-## 🌱  Cómo iniciar este proyecto
+## 🌱 Cómo iniciar este proyecto
 
 Sigue las siguientes instrucciones:
 
@@ -20,4 +20,4 @@ Una vez que hayas terminado de resolver los ejercicios, asegúrate de confirmar 
 
 Una vez comiences a trabajar en el proyecto, verás un fichero `./notebook/problems.ipynb` que contiene una serie de ejercicios. Completa cada uno de ellos, uno por uno.
 
-> NOTA: Solución: https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/notebook/solutions.ipynb
+> Nota: También incorporamos muestras de solución en `./notebook/solutions.ipynb` que te sugerimos honestamente que solo uses si estás atascado por más de 30 minutos o si ya has terminado y quieres compararlo con tu enfoque.
