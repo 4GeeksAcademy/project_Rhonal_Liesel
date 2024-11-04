@@ -5,7 +5,7 @@
 	"solution": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/notebook/solutions.ipynb",
 	"status": "published",
 	"translations": ["us"],
-	"technologies": ["matplotlib", "numpy", "pandas"],
+	"technologies": ["matplotlib", "numpy", "pandas", "scipy", "python", "machine learning", "data science"],
 	"difficulty": "beginner",
 	"syntax": "python",
 	"duration" : 2,
