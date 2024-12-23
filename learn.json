@@ -9,6 +9,8 @@
 	"difficulty": "beginner",
 	"syntax": "python",
 	"duration" : 2,
+	"template_url": "self",
     "projectType": "project",
+	"autoPlay": "false",
 	"description" : "Use your NumPy, Pandas and Matplotlib skills to practice a little about probability distributions"
 }
