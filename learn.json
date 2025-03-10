@@ -1,5 +1,8 @@
 {
-	"title" : "Probability Distributions Exercises Project in Python",
+	"title" : {
+	  "us": "Probability Distributions Exercises Project in Python",
+	  "es": "Proyecto de distibucion de probabilidad con python"
+	},
 	"slug" : "probability-distributions-exercises-project-with-python",
 	"preview": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/preview.jpeg?raw=true",
 	"solution": "https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/blob/main/notebook/solutions.ipynb",
@@ -12,5 +15,12 @@
 	"template_url": "self",
     "projectType": "project",
 	"autoPlay": "false",
-	"description" : "Use your NumPy, Pandas and Matplotlib skills to practice a little about probability distributions"
+	"description": {
+	  "us": "Use your NumPy, Pandas, and Matplotlib skills to practice probability distributions. Complete the exercises in Python, follow the instructions to start, and submit your repository once finished. For additional help, refer to the provided solutions after attempting the problems.",
+	  "es": "Usa tus habilidades en NumPy, Pandas y Matplotlib para practicar distribuciones de probabilidad. Completa los ejercicios en Python, sigue las instrucciones para comenzar y envía tu repositorio una vez que hayas terminado. Para ayuda adicional, consulta las soluciones proporcionadas después de intentar los problemas."
+	},
+	"telemetry": {
+	  "batch": "https://breathecode.herokuapp.com/v1/assignment/me/telemetry?asset_id=360"
+	  },
+  gitpod: true
 }
