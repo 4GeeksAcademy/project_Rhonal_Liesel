@@ -22,5 +22,5 @@
 	"telemetry": {
 	  "batch": "https://breathecode.herokuapp.com/v1/assignment/me/telemetry?asset_id=360"
 	  },
-  gitpod: true
+  	"gitpod": true
 }
