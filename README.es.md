@@ -1,49 +1,59 @@
 <!--hide-->
-# Distribución de probabilidad en Python - Guía paso a paso
-<!--endhide-->
+# Salud Global
+Instrucciones
+Grupos de trabajo
+Para realizar el proyecto final, los alumnos se organizarán en equipos de 2 a 3 personas. El trabajo debe ser colaborativo.
 
-- Resolver los problemas utilizando Python.
+Fases del proyecto
+Paso 1: Definición del problema
+Comienza por definir un problema y conviértelo en un problema de Machine Learning. Este es el primer paso, ya que los datos deben cubrir una necesidad determinada y el proceso de Machine Learning tener como fin satisfacer esa necesidad.
 
-<onlyfor saas="false" withBanner="false">
-  
-## 🌱 Cómo iniciar este proyecto
+La elección del conjunto de datos debe satisfacer unos requisitos mínimos en cuanto a número de filas y de variables predictoras. Como mínimo, debe contener:
 
-Sigue las siguientes instrucciones:
+60.000 instancias (filas)
+20 variables predictoras, de las cuales debe haber al menos 1 variable categórica.
+NOTA: Depende del conjunto de datos y del caso práctico que se quiera explorar, se podría valorar y aceptar datasets que no lleguen al mínimo establecido.
 
-1. Crear un nuevo repositorio haciendo fork en el [proyecto de Git](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python) o [haciendo clic aquí](https://github.com/4GeeksAcademy/probability-distribution-exercises-project-with-python/fork).
-2. Abre el repositorio creado recientemente en Codespace usando la [extensión del botón de Codespace](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository).
-3. Una vez que el VSCode del Codespace haya terminado de abrirse, comienza tu proyecto siguiendo las instrucciones a continuación.
+Paso 2: Obtencion y carga del conjunto de datos
+Puesto que en el mundo real los datos no suelen llegar en un fichero csv plano, se deben adquirir estos datos mediante una de las siguientes vías:
 
+Extracción de datos de alguna página web o portal utilizando técnicas de web scraping.
+Explotación de una base de datos pública utilizando lenguaje SQL (la base de datos debe soportar este lenguaje).
+Explotación de una API pública para obtener datos.
+Una vez tengas los datos, debes almacenarlos en un documento CSV y cargarlos en Python utilizando Pandas.
 
-</onlyfor>
+NOTA: Depende del conjunto de datos y del caso práctico que se quiera explorar, se podría valorar y aceptar datasets descargados por otras vías.
 
+Paso 3: Almacenar la información
+Una práctica muy utilizada es almacenar los datos, sobre todo si son masivos, en una base de datos para llevar a cabo un acceso rápido a ellos. De todas las bases de datos que hemos estudiado, elige la más compatible con tus datos y almacénalos en ella. A continuación, realiza consultas utilizando Python (con código SQL puro o usando los wrappers que hemos estudiado en el curso) para utilizar las distintas sentencias: SELECT, JOIN, INSERT... Estas consultas deben aportar un valor para arrancar el análisis sobre los datos previo al estadístico y al EDA.
 
-## 📝 Instrucciones
+Es importante que comprendas que en el mundo real no sólo tenemos los CSV como aliado para almacenar datos, ya que es más fácil perder un fichero plano como el CSV que una base de datos con sus conexiones y modelos de datos dentro. La seguridad también es un factor crítico e importante para almacenar tus datos allí, ya que un CSV no proporciona ningún mecanismo de protección que otras tecnologías sí.
 
+Paso 4: Realiza un análisis descriptivo
+Los datos en crudo almacenados en una base de datos pueden ser una gran y muy valiosa fuente de información. Antes de comenzar a simplificarlos y a explotarlos con el EDA, debemos conocer sus medidas estadísticas fundamentales: medias, modas, distribuciones, desviaciones, etcétera. Analiza las variables estadísticas descriptivas de cada una de las predictoras del conjunto de datos y teoriza sobre la distribución que sigue cada una de ellas.
 
-1. Una vez comiences a trabajar en el proyecto, verás un fichero `./notebook/problems.ipynb` que contiene una serie de ejercicios.
+Utiliza contrastes de hipótesis si lo consideras necesario.
 
-2. Antes de iniciar, asegúrate de seleccionar el **Kernel adecuado**. 
+Paso 5: Realiza un EDA completo
+Este paso es vital para asegurar que nos quedamos con las variables estrictamente necesarias y eliminamos las que no son relevantes o no aportan información. Utiliza el Notebook de ejemplo que trabajamos y adáptalo a este caso de uso.
 
-    - Al abrir el notebook, aparecerá un mensaje en la parte superior indicando **"Select Kernel"**.  
-    - Haz clic en **"Select Kernel"** (como se muestra en la imagen).       
+Asegúrate de dividir convenientemente el conjunto de datos en train y test como hemos visto en lecciones anteriores.
 
+Paso 6: Construye el modelo y optimízalo
+Una vez tengas los datos listos, decide qué modelo se adapta mejor a ellos y entrénalo. En caso de duda, prueba a utilizar varios de los que ya has estudiado. Selecciona el que mejor se adapte a los datos.
 
-![image-kernel](https://github.com/4GeeksAcademy/probability-exercises-project-in-python/blob/main/assets/image-kernel.png?raw=true)
+Recuerda que el paso de optimización de hiperparámetros es muy importante para explorar y lograr alcanzar la mejor versión del modelo.
 
-3. Se mostrará una lista con las opciones disponibles. Selecciona **"Python Environments"** y elige la versión de Python que deseas utilizar.  
+Paso 7: Despliega el modelo
+Crea una aplicación web de Machine Learning utilizando tu modelo guardado. Puedes usar Flask, Streamlit o cualquier otra herramienta que conozcas. Usa Heroku, Render u otra plataforma de computación en la nube que prefieras para implementar tu aplicación web y compartirla con el mundo. Recuerda que la aplicación va a ser la puerta de entrada a usuarios potenciales o clientes, y hay que cuidar hasta el más mínimo detalle.
 
-    - Asegúrate de seleccionar la versión especificada en el archivo `devcontainer.json`, ya que esta es la recomendada para el proyecto.
+Presentación
+La presentación durará 5 minutos por grupo, así que asegúrate de usar tu tiempo de manera eficiente. El código será revisado, así que no pierdas tiempo explicándolo. Céntrate en los puntos importantes, como si estuvieras intentando vender el proyecto a las partes interesadas de tu empresa o a unos inversores. Ten en cuenta que probablemente no tengan una formación técnica, así que trata de usar palabras simples y una presentación fácil de entender. Recuerda que la calidad supera a la cantidad.
 
+Puntos importantes recomendados para mencionar en tu presentación de 5 minutos:
 
-![image-devcontainer](https://github.com/4GeeksAcademy/probability-exercises-project-in-python/blob/main/assets/devcontainer-image.png?raw=true)
-
-
-
-> Nota: También incorporamos muestras de solución en `./notebook/solutions.ipynb` que te sugerimos honestamente que solo uses si estás atascado por más de 30 minutos o si ya has terminado y quieres compararlo con tu enfoque.
-
-
-## 🚛 Cómo entregar este proyecto
-
-Una vez que hayas terminado de resolver los ejercicios, asegúrate de confirmar tus cambios, haz `push` a tu repositorio y ve a 4Geeks.com para subir el enlace del repositorio.
-
+¿Cuál es problema de negocio que quieres solucionar?
+¿Cómo recopilaste los datos?
+Patrones importantes encontrados en los datos
+¿Qué algoritmo y métrica de evaluación utilizaste para construir tu modelo final?
+Muestra tu aplicación web en funcionamiento y menciona cómo se puede mejorar en el futuro.
