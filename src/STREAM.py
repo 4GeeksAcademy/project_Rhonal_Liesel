@@ -142,6 +142,20 @@ h2 { font-size: 1.3rem !important; font-weight: 700 !important; }
     color: var(--text-primary) !important;
 }
 
+/* Radio buttons sidebar — letra blanca y negrita */
+div[data-testid="stRadio"] label p,
+div[data-testid="stRadio"] label span {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.05em !important;
+}
+div[data-testid="stRadio"] label:hover p,
+div[data-testid="stRadio"] label:hover span {
+    color: #00d4ff !important;
+}
+
 .info-banner {
     background: linear-gradient(90deg, rgba(0, 212, 255, 0.08), rgba(0, 212, 255, 0.02));
     border-left: 3px solid var(--accent-cyan);
