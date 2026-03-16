@@ -171,5 +171,5 @@ jupyter>=1.0
 ---
 
 <div align="center">
-  <sub>Proyecto desarrollado como parte del programa de Machine Learning — 4Geeks Academy · 2024</sub>
+  <sub>Proyecto desarrollado como parte del programa de Machine Learning — 4Geeks Academy · 2026</sub>
 </div>
