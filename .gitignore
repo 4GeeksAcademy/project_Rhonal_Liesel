@@ -3,3 +3,4 @@
 # Checkpoints will not be pushed.
 .ipynb_checkpoints
 src/modelo.pkl
+notebook/modelo.pkl
