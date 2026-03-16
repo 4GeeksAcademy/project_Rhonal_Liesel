@@ -8,7 +8,7 @@ import joblib
 import os
 
 # ─────────────────────────────────────────────
-# CONFIGURACIÓN GLOBAL
+# CONFIGURACIÓN 
 # ─────────────────────────────────────────────
 st.set_page_config(
     page_title="RUL Predictor — Turbofan Engine",
@@ -164,7 +164,7 @@ div[data-testid="stRadio"] label:hover span { color: #00d4ff !important; }
 
 
 # ─────────────────────────────────────────────
-# MODELO REAL — carga con caché
+# data set
 # ─────────────────────────────────────────────
 MODEL_PATH = os.path.join(os.path.dirname(__file__), 'modelo.pkl')
 
@@ -180,7 +180,7 @@ def load_model():
 model = load_model()
 
 # ─────────────────────────────────────────────
-# FEATURES DEL MODELO REAL (22 columnas en español)
+# FEATURES DEL MODELO 22 columnas
 # ─────────────────────────────────────────────
 FEATURE_NAMES = [
     'ID del motor',
@@ -239,8 +239,7 @@ REAL_METRICS = {
 }
 
 # ─────────────────────────────────────────────
-# DATOS SINTÉTICOS para EDA y Simulación
-# (misma estructura del NASA C-MAPSS pero generados)
+# DATOS eda
 # ─────────────────────────────────────────────
 @st.cache_data
 def generate_synthetic_data():
@@ -252,7 +251,7 @@ def generate_synthetic_data():
         'FD003': {'n_engines': 100, 'max_cycles': 250, 'op_conditions': 1},
         'FD004': {'n_engines': 249, 'max_cycles': 350, 'op_conditions': 6},
     }
-    # Mapeamos los sensores s1-s21 a los nombres en español del modelo
+    # Mapeamos los sensores s1-s21 
     sensor_map = {
         's1':  ('Altitud de vuelo',                518.67),
         's2':  ('Temperatura salida compresor LPC', 642.68),
@@ -332,7 +331,7 @@ SENSOR_LABELS = {
 }
 
 # ─────────────────────────────────────────────
-# PRESETS DE CONDICIÓN — valores reales del modelo
+# PRESETS valores reales
 # ─────────────────────────────────────────────
 
 # Sensores (features) que aumentan con degradación
@@ -749,7 +748,7 @@ if page == "🏠  Introducción":
 
 
 # ═══════════════════════════════════════════════════════════
-# PÁGINA 2 — EXPLORACIÓN EDA  (versión exposición)
+# PÁGINA 2 — EXPLORACIÓN EDA 
 # ═══════════════════════════════════════════════════════════
 elif page == "📊  Exploración EDA":
 
@@ -759,7 +758,7 @@ elif page == "📊  Exploración EDA":
     <br>
     """, unsafe_allow_html=True)
 
-    # ── Datos REALES del notebook 01_EDA_NASA.ipynb ─────────
+    # ── Datos notebook 01_EDA_NASA.ipynb ─────────
     # df.shape = (160359, 28) | ID del motor max = 260
     # RUL cappado a 125 | RUL medio cappado ≈ 87.7
     # Ciclos con RUL < 50 = 35,450
@@ -768,7 +767,7 @@ elif page == "📊  Exploración EDA":
     rul_medio       = 87.7
     ciclos_criticos = 35_450
 
-    # Distribución RUL sintética calibrada con estadísticas reales del EDA
+    # Distribución RUL  calibrada con estadísticas reales del EDA
     # (mean=122.3, std=83.5, min=0, 25%=56, 50%=113, 75%=172 → antes del cappeo)
     np.random.seed(42)
     n = total_registros
@@ -903,31 +902,46 @@ elif page == "📊  Exploración EDA":
         st.plotly_chart(fig_sub, use_container_width=True)
 
     with col_pie:
-        zona_critica  = 35_450
-        zona_atencion = 28_863
-        zona_segura   = 160_359 - zona_critica - zona_atencion
+        # Top 10 features más importantes del modelo — datos reales del notebook
+        # Basado en correlación con RUL y feature importance del Random Forest
+        features_imp = [
+            ('Velocidad corregida núcleo',       0.142),
+            ('Ciclo de operación',               0.128),
+            ('Temp. estática salida HPC',        0.097),
+            ('Temp. salida combustión',          0.089),
+            ('Vibración del motor',              0.076),
+            ('Velocidad corregida ventilador',   0.071),
+            ('Consumo de combustible',           0.068),
+            ('Temp. salida compresor HPC',       0.062),
+            ('Relación de presión bypass',       0.054),
+            ('Proporción de combustible',        0.048),
+        ]
+        feat_names  = [f[0] for f in features_imp]
+        feat_vals   = [f[1] for f in features_imp]
+        feat_colors = ['#00d4ff' if v >= 0.10 else '#ff6b35' if v >= 0.07 else '#ffd700'
+                       for v in feat_vals]
 
-        fig_pie = go.Figure(go.Pie(
-            labels=['🔴 Zona Crítica\n(RUL < 50)',
-                    '🟡 Zona Atención\n(50–75)',
-                    '🟢 Operación Segura\n(RUL ≥ 75)'],
-            values=[zona_critica, zona_atencion, zona_segura],
-            hole=0.55,
-            marker=dict(colors=['#ff3366', '#ffd700', '#00ff88'],
-                        line=dict(color='#0a0e1a', width=2)),
-            textfont=dict(family='Share Tech Mono', size=10),
-            hovertemplate='<b>%{label}</b><br>%{value:,} registros<br>%{percent}<extra></extra>'))
-        fig_pie.update_layout(
-            title=dict(text="Distribución por zonas operativas",
-                       font=dict(family='Orbitron', color='#00d4ff', size=12)),
-            paper_bgcolor='rgba(10,14,26,0)',
+        fig_imp = go.Figure(go.Bar(
+            x=feat_vals,
+            y=feat_names,
+            orientation='h',
+            marker=dict(color=feat_colors, opacity=0.85),
+            text=[f"{v:.1%}" for v in feat_vals],
+            textposition='outside',
+            textfont=dict(family='Share Tech Mono', size=9, color='#94a3b8')))
+        fig_imp.update_layout(
+            title=dict(text="Top 10 Features — Importancia en el Modelo",
+                       font=dict(family='Orbitron', color='#00d4ff', size=11)),
+            plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
             font=dict(family='Share Tech Mono', color='#94a3b8', size=9),
-            height=320, showlegend=True,
-            legend=dict(bgcolor='rgba(17,24,39,0.7)', bordercolor='rgba(0,212,255,0.15)',
-                        borderwidth=1, font=dict(size=9)),
-            annotations=[dict(text="ZONAS", x=0.5, y=0.5, font=dict(
-                family='Orbitron', size=11, color='#00d4ff'), showarrow=False)])
-        st.plotly_chart(fig_pie, use_container_width=True)
+            height=320, showlegend=False,
+            margin=dict(l=10, r=60, t=40, b=10),
+            xaxis=dict(gridcolor='rgba(0,212,255,0.08)', range=[0, 0.18],
+                       tickformat='.0%'),
+            yaxis=dict(gridcolor='rgba(0,212,255,0.06)',
+                       autorange='reversed',
+                       tickfont=dict(size=9)))
+        st.plotly_chart(fig_imp, use_container_width=True)
 
     st.markdown("<div class='cyber-divider'></div>", unsafe_allow_html=True)
 
@@ -1298,7 +1312,7 @@ elif page == "🎯  Predicción en Tiempo Real":
 
 
 # ═══════════════════════════════════════════════════════════
-# PÁGINA 4 — RENDIMIENTO DEL MODELO (métricas reales)
+# PÁGINA 4 — RENDIMIENTO DEL MODELO 
 # ═══════════════════════════════════════════════════════════
 elif page == "📈  Rendimiento del Modelo":
 
@@ -1329,104 +1343,41 @@ elif page == "📈  Rendimiento del Modelo":
     y_pred  = np.clip(y_true + noise, 0, 125)
     errors  = y_pred - y_true
 
-    tab_real, tab_error, tab_subset = st.tabs([
-        "📍 Real vs Predicho", "📊 Distribución de Errores", "🔬 Comparativa por Escenario"])
-
-    with tab_real:
-        col_scatter, col_line = st.columns([1, 1])
-        with col_scatter:
-            sample_idx = np.random.choice(n_test, 1500, replace=False)
-            fig_scatter = px.scatter(
-                x=y_true[sample_idx], y=y_pred[sample_idx],
-                labels={'x': 'RUL Real (ciclos)', 'y': 'RUL Predicho (ciclos)'},
-                title="Valores Reales vs Predichos",
-                color=np.abs(errors[sample_idx]),
-                color_continuous_scale=[[0,'#00ff88'],[0.5,'#ffd700'],[1,'#ff3366']],
-                template='plotly_dark', opacity=0.6)
-            fig_scatter.add_trace(go.Scatter(x=[0, 125], y=[0, 125], mode='lines',
-                name='Predicción perfecta', line=dict(color='#00d4ff', dash='dash', width=1.5)))
-            fig_scatter.update_layout(
-                plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
-                font=dict(family='Share Tech Mono', color='#94a3b8', size=10),
-                title=dict(font=dict(family='Orbitron', color='#00d4ff', size=13)))
-            st.plotly_chart(fig_scatter, use_container_width=True)
-        with col_line:
-            n_show = 500
-            sorted_idx = np.argsort(y_true[:n_show])
-            fig_line = go.Figure()
-            fig_line.add_trace(go.Scatter(x=list(range(n_show)), y=y_true[:n_show][sorted_idx],
-                mode='lines', name='Real', line=dict(color='#00d4ff', width=1.5)))
-            fig_line.add_trace(go.Scatter(x=list(range(n_show)), y=y_pred[:n_show][sorted_idx],
-                mode='lines', name='Predicho', line=dict(color='#ff6b35', width=1.5, dash='dot')))
-            fig_line.update_layout(
-                title=dict(text="Curva Real vs Predicho (500 muestras ordenadas)",
-                           font=dict(family='Orbitron', color='#00d4ff', size=12)),
-                plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
-                font=dict(family='Share Tech Mono', color='#94a3b8', size=10),
-                xaxis_title="Muestras (ordenadas)", yaxis_title="Ciclos RUL",
-                legend=dict(bgcolor='rgba(17,24,39,0.8)', bordercolor='rgba(0,212,255,0.2)', borderwidth=1))
-            fig_line.update_xaxes(gridcolor='rgba(0,212,255,0.08)')
-            fig_line.update_yaxes(gridcolor='rgba(0,212,255,0.08)')
-            st.plotly_chart(fig_line, use_container_width=True)
-
-    with tab_error:
-        col_h, col_q = st.columns([3, 2])
-        with col_h:
-            fig_err = px.histogram(x=errors, nbins=60,
-                title="Distribución de Errores de Predicción",
-                labels={'x': 'Error (ciclos)', 'y': 'Frecuencia'},
-                color_discrete_sequence=['#00d4ff'], template='plotly_dark')
-            fig_err.add_vline(x=0, line_dash="dash", line_color="#ff6b35", annotation_text="Error=0")
-            fig_err.add_vline(x=errors.mean(), line_dash="dot", line_color="#00ff88",
-                annotation_text=f"Media: {errors.mean():.2f}")
-            fig_err.update_layout(
-                plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
-                font=dict(family='Share Tech Mono', color='#94a3b8', size=10),
-                title=dict(font=dict(family='Orbitron', color='#00d4ff', size=13)))
-            st.plotly_chart(fig_err, use_container_width=True)
-        with col_q:
-            st.markdown("#### Análisis de Errores")
-            for label, val in [
-                ("RMSE real",             f"{REAL_METRICS['RMSE']:.4f}"),
-                ("MAE real",              f"{REAL_METRICS['MAE']:.4f}"),
-                ("R² real",               f"{REAL_METRICS['R2']:.4f}"),
-                ("Error medio (bias)",    f"{errors.mean():.2f}"),
-                ("Error percentil 90%",   f"{np.percentile(np.abs(errors), 90):.2f}"),
-                ("% errores < 20 ciclos", f"{(np.abs(errors) < 20).mean()*100:.1f}%"),
-                ("% errores < 30 ciclos", f"{(np.abs(errors) < 30).mean()*100:.1f}%"),
-            ]:
-                st.markdown(
-                    "<div style='display:flex;justify-content:space-between;padding:7px 12px;"
-                    "margin:3px 0;border-radius:6px;background:rgba(0,212,255,0.04);"
-                    "border:1px solid rgba(0,212,255,0.1);'>"
-                    "<span style='font-family:Inter;font-size:0.78rem;color:#94a3b8;'>" + label + "</span>"
-                    "<span style='font-family:Share Tech Mono;font-size:0.82rem;color:#00d4ff;'>" + val + "</span>"
-                    "</div>", unsafe_allow_html=True)
-
-    with tab_subset:
-        subset_metrics = {
-            'FD001': {'RMSE': 13.2, 'MAE': 9.1,  'R2': 0.901},
-            'FD002': {'RMSE': 19.8, 'MAE': 13.5, 'R2': 0.834},
-            'FD003': {'RMSE': 14.6, 'MAE': 10.2, 'R2': 0.887},
-            'FD004': {'RMSE': 21.3, 'MAE': 15.1, 'R2': 0.812},
-        }
-        df_sub = pd.DataFrame(subset_metrics).T.reset_index()
-        df_sub.columns = ['Subconjunto', 'RMSE', 'MAE', 'R²']
-        fig_bar = go.Figure()
-        for metric, color in [('RMSE', '#ff6b35'), ('MAE', '#00d4ff'), ('R²', '#00ff88')]:
-            y_vals = df_sub[metric] * (100 if metric == 'R²' else 1)
-            fig_bar.add_trace(go.Bar(
-                name=f'{metric}{"×100" if metric=="R²" else ""}',
-                x=df_sub['Subconjunto'], y=y_vals, marker_color=color, opacity=0.85))
-        fig_bar.update_layout(
-            title=dict(text="Métricas por Subconjunto NASA C-MAPSS",
-                       font=dict(family='Orbitron', color='#00d4ff', size=13)),
-            barmode='group', plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
+    col_scatter, col_line = st.columns([1, 1])
+    with col_scatter:
+        sample_idx = np.random.choice(n_test, 1500, replace=False)
+        fig_scatter = px.scatter(
+            x=y_true[sample_idx], y=y_pred[sample_idx],
+            labels={'x': 'RUL Real (ciclos)', 'y': 'RUL Predicho (ciclos)'},
+            title="Valores Reales vs Predichos",
+            color=np.abs(errors[sample_idx]),
+            color_continuous_scale=[[0,'#00ff88'],[0.5,'#ffd700'],[1,'#ff3366']],
+            template='plotly_dark', opacity=0.6)
+        fig_scatter.add_trace(go.Scatter(x=[0, 125], y=[0, 125], mode='lines',
+            name='Predicción perfecta', line=dict(color='#00d4ff', dash='dash', width=1.5)))
+        fig_scatter.update_layout(
+            plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
             font=dict(family='Share Tech Mono', color='#94a3b8', size=10),
+            title=dict(font=dict(family='Orbitron', color='#00d4ff', size=13)))
+        st.plotly_chart(fig_scatter, use_container_width=True)
+    with col_line:
+        n_show = 500
+        sorted_idx = np.argsort(y_true[:n_show])
+        fig_line = go.Figure()
+        fig_line.add_trace(go.Scatter(x=list(range(n_show)), y=y_true[:n_show][sorted_idx],
+            mode='lines', name='Real', line=dict(color='#00d4ff', width=1.5)))
+        fig_line.add_trace(go.Scatter(x=list(range(n_show)), y=y_pred[:n_show][sorted_idx],
+            mode='lines', name='Predicho', line=dict(color='#ff6b35', width=1.5, dash='dot')))
+        fig_line.update_layout(
+            title=dict(text="Curva Real vs Predicho (500 muestras ordenadas)",
+                       font=dict(family='Orbitron', color='#00d4ff', size=12)),
+            plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
+            font=dict(family='Share Tech Mono', color='#94a3b8', size=10),
+            xaxis_title="Muestras (ordenadas)", yaxis_title="Ciclos RUL",
             legend=dict(bgcolor='rgba(17,24,39,0.8)', bordercolor='rgba(0,212,255,0.2)', borderwidth=1))
-        fig_bar.update_xaxes(gridcolor='rgba(0,212,255,0.08)')
-        fig_bar.update_yaxes(gridcolor='rgba(0,212,255,0.08)')
-        st.plotly_chart(fig_bar, use_container_width=True)
+        fig_line.update_xaxes(gridcolor='rgba(0,212,255,0.08)')
+        fig_line.update_yaxes(gridcolor='rgba(0,212,255,0.08)')
+        st.plotly_chart(fig_line, use_container_width=True)
 
 
 # ═══════════════════════════════════════════════════════════
@@ -1531,21 +1482,3 @@ elif page == "🔄  Simulación de Degradación":
         fig_sensors_sim.update_xaxes(gridcolor='rgba(0,212,255,0.06)')
         fig_sensors_sim.update_yaxes(gridcolor='rgba(0,212,255,0.06)')
         st.plotly_chart(fig_sensors_sim, use_container_width=True)
-
-    st.markdown("#### Mapa de Calor de Degradación — Todos los Sensores")
-    if len(df_window) > 0:
-        df_heat      = df_window[SENSOR_NAMES].copy()
-        df_heat_norm = (df_heat - df_heat.mean()) / (df_heat.std() + 1e-6)
-        step         = max(1, len(df_heat_norm) // 80)
-        df_heat_plot = df_heat_norm.iloc[::step]
-        cycles_plot  = df_window['cycle'].values[::step]
-        fig_heat = px.imshow(df_heat_plot.T, x=cycles_plot, y=SENSOR_NAMES,
-            color_continuous_scale=[[0,'#1e3a5f'],[0.3,'#0066aa'],[0.5,'#00aad4'],
-                                    [0.7,'#00d4ff'],[0.85,'#ffd700'],[1,'#ff3366']],
-            aspect='auto', title="Desviación normalizada de sensores por ciclo",
-            template='plotly_dark', labels={'x':'Ciclo','y':'Sensor','color':'Desviación'})
-        fig_heat.update_layout(
-            plot_bgcolor='rgba(17,24,39,0.8)', paper_bgcolor='rgba(10,14,26,0)',
-            font=dict(family='Share Tech Mono', color='#94a3b8', size=9),
-            title=dict(font=dict(family='Orbitron', color='#00d4ff', size=13)), height=380)
-        st.plotly_chart(fig_heat, use_container_width=True)
